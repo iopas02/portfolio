@@ -33,7 +33,7 @@ jobs:
     - name: Check CSS files  
       run: |
         echo "Checking CSS files for errors..."
-        stylelint "css/*.css" g|| exit 1
+        stylelint "css/*.css" || exit 1
 
   deploy:
     name: Deploy to GitHub Pages

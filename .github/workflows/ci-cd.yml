@@ -28,12 +28,12 @@ jobs:
     - name: Check HTML files
       run: |
         echo "Checking HTML files for errors..."
-        htmlhint **/*.html --verbose || exit 1
+        htmlhint **/*.html || exit 1
         
     - name: Check CSS files  
       run: |
         echo "Checking CSS files for errors..."
-        stylelint "css/*.css" --formatter verbose || exit 1
+        stylelint "css/*.css" || exit 1
 
   deploy:
     name: Deploy to GitHub Pages

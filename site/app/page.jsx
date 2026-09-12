@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import HeroPortrait from '../components/HeroPortrait';
 import CvUnlock from '../components/CvUnlock';
 import Deck from '../components/Deck';
 import SkillsJourney from '../components/SkillsJourney';
@@ -53,11 +54,7 @@ function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center bg-gradient-to-b from-surface to-dark px-6">
       <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-        <img
-          src="/images/profile-pic.jpg"
-          alt={portfolioData.personal.fullName}
-          className="mb-8 h-36 w-36 rounded-full object-cover ring-4 ring-accent/30 shadow-[0_0_50px_rgba(255,0,119,0.25)] md:h-44 md:w-44"
-        />
+        <HeroPortrait />
         <p className="mb-4 text-sm font-medium uppercase tracking-widest text-accent">
           Hello, World.
         </p>

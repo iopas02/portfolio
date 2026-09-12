@@ -32,8 +32,8 @@ const nodes = SKILLS.map((name, i) => {
   const outer = i % 2 === 0;
   return {
     name,
-    x: CX + (outer ? 38 : 30) * Math.cos(angle),
-    y: CY + (outer ? 26 : 19) * Math.sin(angle) + (i === 0 ? 6 : 0),
+    x: +(CX + (outer ? 38 : 30) * Math.cos(angle)).toFixed(4),
+    y: +(CY + (outer ? 26 : 19) * Math.sin(angle) + (i === 0 ? 6 : 0)).toFixed(4),
   };
 });
 
@@ -147,8 +147,8 @@ export default function SkillsJourney() {
                 left: `${node.x}%`,
                 top: `${node.y}%`,
                 opacity: t,
-                transform: `translate(-50%, -50%) scale(${0.5 + 0.5 * t})`,
-                borderColor: t >= 1 ? 'rgba(255,0,119,0.5)' : undefined,
+                transform: `translate(-50%, -50%) scale(${(0.5 + 0.5 * t).toFixed(4)})`,
+                ...(t >= 1 ? { borderColor: 'rgba(255,0,119,0.5)' } : {}),
               }}
             >
               {node.name}

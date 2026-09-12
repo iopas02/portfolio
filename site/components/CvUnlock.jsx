@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Lock, Download, Check } from 'lucide-react';
 import { DECK_CHANGE } from '../lib/deck';
 
-const CV_URL = '/api/cv';
+const CV_URL = '/files/abuzo-CV-2026.pdf';
 
 export default function CvUnlock() {
   const [index, setIndex] = useState(0);

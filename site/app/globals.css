@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.deck-panel {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+  scrollbar-gutter: stable;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.deck-panel[data-variant='rise'] {
+  transform: translateY(56px);
+}
+
+.deck-panel[data-variant='zoom'] {
+  transform: scale(1.05);
+}
+
+.deck-panel[data-variant='slide'] {
+  transform: translateX(72px);
+}
+
+.deck-panel.active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+body {
+  @apply bg-dark text-zinc-100 antialiased;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+::selection {
+  background-color: #FF0077;
+  color: white;
+}
+
+/* Scrollbars — match the dark minimal theme */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 0, 119, 0.6);
+}

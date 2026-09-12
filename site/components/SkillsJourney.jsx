@@ -33,7 +33,7 @@ const nodes = SKILLS.map((name, i) => {
   return {
     name,
     x: CX + (outer ? 38 : 30) * Math.cos(angle),
-    y: CY + (outer ? 26 : 19) * Math.sin(angle),
+    y: CY + (outer ? 26 : 19) * Math.sin(angle) + (i === 0 ? 6 : 0),
   };
 });
 
@@ -89,9 +89,6 @@ export default function SkillsJourney() {
           <h2 className="text-3xl font-bold text-white md:text-4xl">
             One skill at a time.
           </h2>
-          <p className="mt-2 text-muted">
-            Keep scrolling — watch the stack connect year after year.
-          </p>
         </div>
 
         <svg

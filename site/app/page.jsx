@@ -250,12 +250,12 @@ function Contact() {
     {
       icon: MapPin,
       title: 'Where to find me',
-      content: `${street}, ${village}, ${barangay}, ${city}, ${postalCode} ${country}`,
+      content: `${street}, ${barangay}, ${city}, ${postalCode} ${country}`,
     },
     {
       icon: Mail,
       title: 'Email Me At',
-      content: `${email}\n${secondaryEmail}`,
+      content: email,
     },
     {
       icon: Phone,

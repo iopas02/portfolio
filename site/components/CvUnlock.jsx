@@ -7,18 +7,20 @@ import { DECK_CHANGE } from '../lib/deck';
 const CV_URL = '/api/cv';
 
 export default function CvUnlock() {
-  const [index, setIndex] = useState(0);
+  const [maxIndex, setMaxIndex] = useState(0);
   const [total, setTotal] = useState(8);
+  const [unlocked, setUnlocked] = useState(false);
   const [justUnlocked, setJustUnlocked] = useState(false);
 
-  const progress = total > 1 ? index / (total - 1) : 0;
-  const unlocked = index === total - 1;
+  const progress = total > 1 ? maxIndex / (total - 1) : 0;
   const percent = Math.min(100, Math.round(progress * 100));
 
   useEffect(() => {
     const onChange = (e) => {
-      setIndex(e.detail.index);
-      setTotal(e.detail.total);
+      const { index, total } = e.detail;
+      setTotal(total);
+      setMaxIndex((prev) => Math.max(prev, index));
+      if (index === total - 1) setUnlocked(true);
     };
     window.addEventListener(DECK_CHANGE, onChange);
     return () => window.removeEventListener(DECK_CHANGE, onChange);
@@ -69,7 +71,7 @@ export default function CvUnlock() {
       <span className="text-sm font-medium">
         {unlocked
           ? 'CV unlocked'
-          : `Explore to unlock CV · ${index + 1}/${total}`}
+          : `Explore to unlock CV · ${maxIndex + 1}/${total}`}
       </span>
     </>
   );
@@ -97,7 +99,7 @@ export default function CvUnlock() {
     <div
       className={`${baseClass} cursor-not-allowed border-white/10 bg-dark/90 text-muted`}
       aria-live="polite"
-      aria-label={`CV locked — section ${index + 1} of ${total}`}
+      aria-label={`CV locked — section ${maxIndex + 1} of ${total}`}
     >
       {inner}
     </div>

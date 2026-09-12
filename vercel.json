@@ -3,5 +3,6 @@
   "buildCommand": "cd site && npm run build",
   "installCommand": "npm install && cd site && npm install",
   "outputDirectory": "site/dist",
+  "cleanUrls": true,
   "framework": null
 }

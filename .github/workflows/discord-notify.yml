@@ -1,0 +1,99 @@
+name: Discord Deploy Notification
+
+on:
+  push:
+    branches:
+      - main  # change this if your default branch is "master" or something else
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Wait for Vercel Deployment
+        id: wait
+        run: |
+          echo "Waiting 30 seconds for Vercel to deploy..."
+          sleep 30
+
+      - name: Send Discord Notification (Success)
+        if: success()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{
+            "embeds": [{
+              "title": "✅ Deployment Successful",
+              "description": "A new push was deployed to Vercel successfully.",
+              "color": 3066993,
+              "fields": [
+                {
+                  "name": "📁 Repository",
+                  "value": "${{ github.repository }}",
+                  "inline": true
+                },
+                {
+                  "name": "🌿 Branch",
+                  "value": "${{ github.ref_name }}",
+                  "inline": true
+                },
+                {
+                  "name": "💬 Commit",
+                  "value": "${{ github.event.head_commit.message }}",
+                  "inline": false
+                },
+                {
+                  "name": "👤 Pushed by",
+                  "value": "${{ github.actor }}",
+                  "inline": true
+                }
+              ],
+              "footer": {
+                "text": "GitHub Actions • Vercel"
+              },
+              "timestamp": "${{ github.event.head_commit.timestamp }}"
+            }]
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: Send Discord Notification (Failure)
+        if: failure()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{
+            "embeds": [{
+              "title": "❌ Deployment Failed",
+              "description": "Something went wrong during the Vercel deployment.",
+              "color": 15158332,
+              "fields": [
+                {
+                  "name": "📁 Repository",
+                  "value": "${{ github.repository }}",
+                  "inline": true
+                },
+                {
+                  "name": "🌿 Branch",
+                  "value": "${{ github.ref_name }}",
+                  "inline": true
+                },
+                {
+                  "name": "💬 Commit",
+                  "value": "${{ github.event.head_commit.message }}",
+                  "inline": false
+                },
+                {
+                  "name": "👤 Pushed by",
+                  "value": "${{ github.actor }}",
+                  "inline": true
+                }
+              ],
+              "footer": {
+                "text": "GitHub Actions • Vercel"
+              },
+              "timestamp": "${{ github.event.head_commit.timestamp }}"
+            }]
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}

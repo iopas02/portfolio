@@ -22,6 +22,7 @@ const SKILL_INFO = {
   'Next.js': 'React framework for SSR, routing, and fast sites',
   'Vue.js': 'Progressive framework for reactive interfaces',
   Python: 'Scripting, automation, and backend utilities',
+  n8n: 'No-code workflow automation between apps and services',
   'RESTful APIs': 'Designing and integrating HTTP services',
   'SaaS Development': 'Multi-tenant platforms and subscription products',
   'Server Deployment': 'Shipping and managing live production apps',

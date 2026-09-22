@@ -11,7 +11,7 @@ const portfolioData = {
     birthDate: "July 11, 1997",
     email: "abuzo.daniel@gmail.com",
     secondaryEmail: "charlesdaniel.abuzo@benilde.edu.ph",
-    phone: "(+63) 936 240 2090",
+    phone: "(+63) 976 303 1315",
     location: {
       street: "256, 25th street",
       village: "Fortune VIllage 5",
@@ -387,7 +387,7 @@ function initializePortfolio() {
     folioWrapper.innerHTML =
       generatePortfolioItems(portfolioData.projects) +
       generatePortfolioModals(portfolioData.projects);
-    
+
     // Reinitialize MagnificPopup for dynamically generated content
     if (typeof $ !== 'undefined' && $.fn.magnificPopup) {
       $('.item-wrap a').magnificPopup({
@@ -397,7 +397,7 @@ function initializePortfolio() {
         showCloseBtn: false,
         mainClass: 'mfp-fade'
       });
-      
+
       // Reinitialize popup modal dismiss event
       $(document).off('click', '.popup-modal-dismiss').on('click', '.popup-modal-dismiss', function (e) {
         e.preventDefault();

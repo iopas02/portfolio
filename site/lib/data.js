@@ -31,10 +31,55 @@ export const portfolioData = {
     'Next.js',
     'Vue.js',
     'Python',
+    'n8n',
     'RESTful APIs',
     'SaaS Development',
     'Server Deployment',
   ],
+  now: {
+    label: 'Currently Doing',
+    period: 'Updated September 2026',
+    title: 'Upskilling in Automation.',
+    description:
+      "Right now I'm leveling up my automation game — writing smarter scripts, automating away repetitive work, and building processes that test and ship themselves.",
+    focus: [
+      {
+        label: 'Test Automation',
+        description:
+          'Mastering modern end-to-end testing tools to automate quality checks and catch bugs before they ship.',
+        icon: 'Bot',
+        tools: ['Puppeteer', 'Cypress', 'Jest'],
+      },
+      {
+        label: 'CI/CD Pipelines',
+        description:
+          'Building automated build, test, and deployment flows for faster, more reliable releases.',
+        icon: 'Workflow',
+        tools: ['GitHubActions', 'GitLab', 'Jenkins'],
+      },
+      {
+        label: 'Workflow Automation with n8n',
+        description:
+          'Building no-code / low-code automation workflows with n8n to connect apps, schedule tasks, and streamline operations.',
+        icon: 'Workflow',
+        tools: ['N8N', 'Zapier', 'Make'],
+      },
+      {
+        label: 'Scripting & RPA',
+        description:
+          'Using Python and shell scripting to eliminate manual, repetitive tasks across projects.',
+        icon: 'Terminal',
+        tools: ['Python', 'Git'],
+      },
+      {
+        label: 'Monitoring & Alerting',
+        description:
+          'Setting up automated error tracking, logging, and performance alerts to keep systems healthy.',
+        icon: 'Activity',
+        tools: ['Sentry', 'Grafana'],
+      },
+    ],
+  },
   education: [
     {
       level: 'Bachelor Degree',

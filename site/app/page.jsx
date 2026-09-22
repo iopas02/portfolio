@@ -21,10 +21,45 @@ import {
   Phone,
   ExternalLink,
   ArrowUp,
+  Bot,
+  Workflow,
+  Terminal,
+  Activity,
 } from 'lucide-react';
+import {
+  SiN8N,
+  SiZapier,
+  SiSentry,
+  SiGit,
+  SiGithubactions,
+  SiGitlab,
+  SiJenkins,
+  SiPuppeteer,
+  SiCypress,
+  SiJest,
+  SiPython,
+  SiGrafana,
+  SiMake,
+} from 'react-icons/si';
 
 const socialIcons = { Facebook, Twitter, Linkedin, Instagram, Github };
 const hobbyIcons = { Gamepad2, Puzzle, Trophy, Footprints, Video, Laptop };
+const nowIcons = { Bot, Workflow, Terminal, Activity };
+const brandIcons = {
+  N8N: SiN8N,
+  Zapier: SiZapier,
+  Sentry: SiSentry,
+  Git: SiGit,
+  GitHubActions: SiGithubactions,
+  GitLab: SiGitlab,
+  Jenkins: SiJenkins,
+  Puppeteer: SiPuppeteer,
+  Cypress: SiCypress,
+  Jest: SiJest,
+  Python: SiPython,
+  Grafana: SiGrafana,
+  Make: SiMake,
+};
 
 const gradients = [
   'from-rose-500 to-pink-600',
@@ -149,6 +184,65 @@ function Experience() {
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading eyebrow="Work Experience" title="Professional Journey." />
         <Timeline items={portfolioData.workExperience} icon={Linkedin} />
+      </div>
+    </section>
+  );
+}
+
+function Now() {
+  const { label, period, title, description, focus } = portfolioData.now;
+
+  return (
+    <section className="flex min-h-screen items-center bg-dark px-6 py-24">
+      <div className="mx-auto w-full max-w-6xl">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
+          {label}
+        </p>
+        <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">{title}</h2>
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+          </span>
+          {period}
+        </div>
+        <p className="mb-12 text-lg text-muted">{description}</p>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {focus.map((item) => {
+            return (
+              <div
+                key={item.label}
+                className="rounded-2xl bg-surface/50 p-6 transition-colors hover:bg-surface"
+              >
+                <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold text-white">
+                    {item.label}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    {item.tools?.map((tool) => {
+                      const BrandIcon = brandIcons[tool];
+                      if (!BrandIcon) return null;
+                      return (
+                        <span
+                          key={tool}
+                          title={tool}
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-dark text-zinc-300"
+                        >
+                          <BrandIcon size={15} />
+                        </span>
+                      );
+                    })}
+                    <span className="rounded-full bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-accent">
+                      Now
+                    </span>
+                  </div>
+                </div>
+                <p className="text-sm text-muted">{item.description}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -341,6 +435,7 @@ const sections = [
     ),
   },
   { id: 'about', children: <About /> },
+  { id: 'now', children: <Now /> },
   { id: 'experience', children: <Experience /> },
   { id: 'education', children: <Education /> },
   { id: 'projects', children: <Projects /> },

@@ -18,6 +18,23 @@ jobs:
           echo "Waiting 30 seconds for Vercel to deploy..."
           sleep 30
 
+      - name: Get Vercel Deployment URL
+        id: vercelUrl
+        run: |
+          URL=""
+          if [ -n "${{ secrets.VERCEL_TOKEN }}" ] && [ -n "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            URL=$(curl -s -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+              "https://api.vercel.com/v6/deployments?projectId=${{ secrets.VERCEL_PROJECT_ID }}&limit=1&target=production&state=READY" \
+              | jq -r '.deployments[0].url // empty')
+            if [ -n "$URL" ]; then
+              URL="https://$URL"
+            fi
+          fi
+          if [ -z "$URL" ] && [ -n "${{ secrets.VERCEL_PROD_URL }}" ]; then
+            URL="${{ secrets.VERCEL_PROD_URL }}"
+          fi
+          echo "url=${URL}" >> "$GITHUB_OUTPUT"
+
       - name: Send Discord Notification (Success)
         if: success()
         run: |
@@ -27,6 +44,7 @@ jobs:
             "embeds": [{
               "title": "✅ Deployment Successful",
               "description": "A new push was deployed to Vercel successfully.",
+              "url": "${{ steps.vercelUrl.outputs.url }}",
               "color": 3066993,
               "fields": [
                 {
@@ -38,6 +56,11 @@ jobs:
                   "name": "🌿 Branch",
                   "value": "${{ github.ref_name }}",
                   "inline": true
+                },
+                {
+                  "name": "🚀 Live URL",
+                  "value": "${{ steps.vercelUrl.outputs.url }}",
+                  "inline": false
                 },
                 {
                   "name": "💬 Commit",
@@ -67,6 +90,7 @@ jobs:
             "embeds": [{
               "title": "❌ Deployment Failed",
               "description": "Something went wrong during the Vercel deployment.",
+              "url": "${{ steps.vercelUrl.outputs.url }}",
               "color": 15158332,
               "fields": [
                 {
@@ -78,6 +102,11 @@ jobs:
                   "name": "🌿 Branch",
                   "value": "${{ github.ref_name }}",
                   "inline": true
+                },
+                {
+                  "name": "🚀 Live URL",
+                  "value": "${{ steps.vercelUrl.outputs.url }}",
+                  "inline": false
                 },
                 {
                   "name": "💬 Commit",
